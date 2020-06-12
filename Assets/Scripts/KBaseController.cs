@@ -86,7 +86,7 @@ public class KBaseController : BaseController
         }
 
         //armor
-        if (health >= 90 && armor < 80)
+        if (health >= 90 && armor < 50)
         {
             GameObject[] aFood = GameObject.FindGameObjectsWithTag("Armor");
 
@@ -105,7 +105,7 @@ public class KBaseController : BaseController
         }
 
         //ammo
-        if (health >= 90 && armor >= 80 && ammo < 30)
+        if (health >= 90 && armor >= 50 && ammo < 30)
         {
             GameObject[] amFood = GameObject.FindGameObjectsWithTag("Ammo");
 
@@ -124,7 +124,7 @@ public class KBaseController : BaseController
         }
 
         //Energy
-        if (health >= 90 && armor >= 80 && ammo >= 30 && energy < 30)
+        if (health >= 90 && armor >= 80 && ammo >= 50 && energy < 30)
         {
             GameObject[] eFood = GameObject.FindGameObjectsWithTag("Energy");
 
@@ -145,7 +145,7 @@ public class KBaseController : BaseController
 
 
         //MetaPlus
-        if (health >= 90 && armor >= 80  && metabolism < 8)
+        if (health >= 90 && armor >= 50  && metabolism < 8)
         {
             GameObject[] mFood = GameObject.FindGameObjectsWithTag("MetaPlus");
 
@@ -164,7 +164,7 @@ public class KBaseController : BaseController
         }
 
         //MetaMin
-        if (health >= 90 && armor >= 80 && metabolism >= 12)
+        if (health >= 90 && armor >= 50 && metabolism >= 12)
         {
             GameObject[] m2Food = GameObject.FindGameObjectsWithTag("MetaMin");
 
