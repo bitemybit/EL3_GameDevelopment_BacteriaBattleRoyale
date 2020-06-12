@@ -8,6 +8,8 @@ public class BrandonController : BaseController
 {
     public bool travelling;
     private NavMeshAgent _navMeshAgent;
+
+    public float wallTolerance = 50;
     
     public Text healthT;
     public Text armorT;
@@ -15,31 +17,36 @@ public class BrandonController : BaseController
     public Text metabolismT;
     public Text ammoT;
     public Text nameT;
+    public Text StateT;
+    
+    public List<GameObject> boundaries;
 
-    public GameObject boundary1;
-    public GameObject boundary2;
-    public GameObject boundary3;
-    public GameObject boundary4;
+    public SphereCollider collider;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        boundaries.Add(GameObject.Find("TopBoundary"));
+        boundaries.Add(GameObject.Find("BotBoundary"));
+        boundaries.Add(GameObject.Find("LeftBoundary"));
+        boundaries.Add(GameObject.Find("RightBoundary"));
     }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
-        
+        //();
         if (_navMeshAgent == null)
         {
             Debug.LogError("nav mesh component is not attached");
         }
         else
         {
-            FindFood();
+            SwitchState();
             //GoToCenter();
             if (transform.position.x < -5 || transform.position.z > 37f || transform.position.x > 30f || transform.position.z < 5f)
             {
@@ -50,7 +57,7 @@ public class BrandonController : BaseController
         if (travelling && _navMeshAgent.isStopped)
         {
             travelling = false;
-            FindFood();
+            SwitchState();
         }
         
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
@@ -66,14 +73,106 @@ public class BrandonController : BaseController
         }
     }
 
-    void GoToCenter()
+    private void GoToCenter()
     {
-        Vector3 center = new Vector3(11f, -48.22035f, 23.2f);
+        StateT.text = "Avoiding Walls...";
+        Vector3 center = new Vector3(0, 0, 0);
         _navMeshAgent.SetDestination(center);
+    }
+
+    void Rays()
+    {
+        RaycastHit hit1;
+        RaycastHit hit2;
+        RaycastHit hit3;
+        RaycastHit hit4;
+        
+        var rayOriginX1 = new Vector3(transform.position.x + collider.radius * 2, transform.position.y, transform.position.z);
+        var rayOriginX2 = new Vector3(transform.position.x - collider.radius * 2, transform.position.y, transform.position.z);
+        var rayOriginZ1 = new Vector3(transform.position.x, transform.position.y, transform.position.z  + collider.radius * 2);
+        var rayOriginZ2 = new Vector3(transform.position.x, transform.position.y, transform.position.z  - collider.radius * 2);
+        
+        if (Physics.Raycast(rayOriginX1, transform.TransformDirection(Vector3.right), out hit1, wallTolerance))
+        {
+            Debug.DrawRay(rayOriginX1, transform.TransformDirection(Vector3.right)*wallTolerance, Color.black);
+            if (hit1.collider.gameObject.GetComponent<BoundaryController>())
+            {
+                Debug.DrawRay(rayOriginX1, transform.TransformDirection(Vector3.right)*wallTolerance, Color.red);
+                GoToCenter();
+            }
+        }
+        
+        if (Physics.Raycast(rayOriginX2, transform.TransformDirection(Vector3.right), out hit2, wallTolerance))
+        {
+            Debug.DrawRay(rayOriginX2, transform.TransformDirection(-Vector3.right)*wallTolerance, Color.black);
+            if (hit2.collider.gameObject.GetComponent<BoundaryController>())
+            {
+                Debug.DrawRay(rayOriginX1, transform.TransformDirection(Vector3.right)*wallTolerance, Color.red);
+                GoToCenter();
+            }
+        }
+        
+        if (Physics.Raycast(rayOriginZ1, transform.TransformDirection(Vector3.right), out hit3, wallTolerance))
+        {
+            Debug.DrawRay(rayOriginZ1, transform.TransformDirection(Vector3.forward)*wallTolerance, Color.black);
+            if (hit3.collider.gameObject.GetComponent<BoundaryController>())
+            {
+                Debug.DrawRay(rayOriginX1, transform.TransformDirection(Vector3.right)*wallTolerance, Color.red);
+                GoToCenter();
+            }
+        }
+        
+        if (Physics.Raycast(rayOriginZ2, transform.TransformDirection(Vector3.right), out hit4, wallTolerance))
+        {
+            Debug.DrawRay(rayOriginZ2, transform.TransformDirection(-Vector3.forward)*wallTolerance, Color.black);
+            if (hit4.collider.gameObject.GetComponent<BoundaryController>())
+            {
+                Debug.DrawRay(rayOriginX1, transform.TransformDirection(Vector3.right)*wallTolerance, Color.red);
+                GoToCenter();
+            }
+        }
+    }
+
+    void SwitchState()
+    {
+        if (transform.position.x <= boundaries[3].transform.position.x - wallTolerance &&
+            transform.position.x > boundaries[2].transform.position.x + wallTolerance &&
+            transform.position.x >= boundaries[1].transform.position.z + wallTolerance &&
+            transform.position.z <= boundaries[0].transform.position.z - wallTolerance)
+        {
+            FindFood();
+        }
+        else
+        {
+            GoToCenter();
+            /*var lowestDist = Mathf.Infinity;
+            
+            for (int i = 0; i < boundaries.Count; i++)
+            {
+                var closest = boundaries[i].GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                var dist = Vector3.Distance(transform.position, closest);
+                if (dist < lowestDist)
+                {
+                    dist = lowestDist;
+                }
+            }
+
+            StateT.text = "" + lowestDist;
+
+            if (lowestDist > wallTolerance)
+            {
+                FindFood();
+            }
+            else
+            {
+               
+            }*/
+        }
     }
 
     void FindFood()
     {
+        StateT.text = "Searching Food..";
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
         

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Brandon\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Brandon\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_EL3_GameDevelopment_BacteriaBattleRoyale.-1872194690.00" t="ExcludeRecursive" />
+    <e p="E:\GitHub\EL3_GameDevelopment_BacteriaBattleRoyale" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="GameManager.cs" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="BaseController.cs" t="Include" />
+          <e p="BoundaryController.cs" t="Include" />
+          <e p="BrandonController.cs" t="Include" />
+          <e p="Bullet.cs" t="Include" />
+          <e p="CameraController.cs" t="Include" />
+          <e p="CameraManager.cs" t="Include" />
+          <e p="ClickMoveCharacter.cs" t="Include" />
+          <e p="Food.cs" t="Include" />
+          <e p="FoodCluster.cs" t="Include" />
+          <e p="FoodGeneration.cs" t="Include" />
+          <e p="GBaseController.cs" t="Include" />
+          <e p="KBaseController.cs" t="Include" />
+          <e p="Movement.cs" t="Include" />
+          <e p="Shoot.cs" t="Include" />
+          <e p="Utility.cs" t="Include" />
+        </e>
+      </e>
+      <e p="EL3_GameDevelopment_BacteriaBattleRoyale.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
