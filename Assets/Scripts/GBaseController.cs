@@ -59,6 +59,7 @@ public class GBaseController : BaseController
         metabolismT.text = "Metabolism: " + metabolism.ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
+        //UI SHOWS STATES
         if (FoodEnemyWalls == 1)
         {
             StateT.text = "Searching Food..";
@@ -183,8 +184,6 @@ public class GBaseController : BaseController
                     travelling = true;
                 }
             }
-
-
 
             //MetaPlus
             if (health >= 90 && armor >= 30 && metabolism < 8)
