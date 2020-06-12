@@ -19,6 +19,9 @@ public class KBaseController : BaseController
     public Text metabolismT;
     public Text ammoT;
     public Text nameT;
+    public Text StateT;
+
+    private int FoodEnemyWalls;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -39,6 +42,7 @@ public class KBaseController : BaseController
         }
         else
         {
+
             DestinationF();
         }
 
@@ -53,7 +57,20 @@ public class KBaseController : BaseController
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
         metabolismT.text = "Metabolism: " + metabolism.ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
-        
+
+        if (FoodEnemyWalls == 1)
+        {
+            StateT.text = "Searching Food..";
+        }
+        if (FoodEnemyWalls == 2)
+        {
+            StateT.text = "Searching Enemies..";
+        }
+        if (FoodEnemyWalls == 3)
+        {
+            StateT.text = "Avoiding Walls..";
+        }
+
         if (!alive)
         {
             nameT.color = Color.red;
@@ -63,6 +80,7 @@ public class KBaseController : BaseController
 
     private void DestinationF()
     {
+        FoodEnemyWalls = 1;
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
 
@@ -181,9 +199,5 @@ public class KBaseController : BaseController
                 travelling = true;
             }
         }
-
-
-
-
     }
 }
