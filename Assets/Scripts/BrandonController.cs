@@ -11,6 +11,7 @@ public class BrandonController : BaseController
 
     public float wallTolerance = 50;
     
+    // Main UI
     public Text healthT;
     public Text armorT;
     public Text energyT;
@@ -18,7 +19,16 @@ public class BrandonController : BaseController
     public Text ammoT;
     public Text nameT;
     public Text StateT;
-    
+
+    // Brandon Cam UI
+    public Text healthTT;
+    public Text armorTT;
+    public Text energyTT;
+    public Text metabolismTT;
+    public Text ammoTT;
+    public Text nameTT;
+    public Text StateTT;
+
     public List<GameObject> boundaries;
 
     public SphereCollider collider;
@@ -66,9 +76,16 @@ public class BrandonController : BaseController
         metabolismT.text = "Metabolism: " + metabolism.ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
+        healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
+        armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
+        energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
+        metabolismTT.text = "Metabolism: " + metabolism.ToString();
+        ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
+
         if (!alive)
         {
             nameT.color = Color.red;
+            nameTT.color = Color.red;
             Destroy(gameObject);
         }
     }
@@ -76,6 +93,7 @@ public class BrandonController : BaseController
     private void GoToCenter()
     {
         StateT.text = "Avoiding Walls...";
+        StateTT.text = "Avoiding Walls...";
         Vector3 center = new Vector3(0, 0, 0);
         _navMeshAgent.SetDestination(center);
     }
@@ -173,6 +191,7 @@ public class BrandonController : BaseController
     void FindFood()
     {
         StateT.text = "Searching Food..";
+        StateTT.text = "Searching Food..";
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
         

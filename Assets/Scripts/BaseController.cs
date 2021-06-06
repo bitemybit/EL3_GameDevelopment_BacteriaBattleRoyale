@@ -47,7 +47,7 @@ public class BaseController : MonoBehaviour
         initHealth = health;
         energyDepletion = (1 / metabolism) * 10;
         StartCoroutine(_loseEnergy());
-        gameManager.GetComponent<CameraManager>().agentCameras.Add(camera);
+        //gameManager.GetComponent<CameraManager>().agentCameras.Add(camera);
         //StartCoroutine(_idle());
         inRange = false;
         InvokeRepeating("ShootEnemy", 0f, 0.5f);

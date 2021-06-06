@@ -21,6 +21,14 @@ public class GBaseController : BaseController
     public Text nameT;
     public Text StateT;
 
+    public Text healthTT;
+    public Text armorTT;
+    public Text energyTT;
+    public Text metabolismTT;
+    public Text ammoTT;
+    public Text nameTT;
+    public Text StateTT;
+
     public List<GameObject> boundaries;
     private int FoodEnemyWalls = 0;
 
@@ -59,18 +67,27 @@ public class GBaseController : BaseController
         metabolismT.text = "Metabolism: " + metabolism.ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
+        healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
+        armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
+        energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
+        metabolismTT.text = "Metabolism: " + metabolism.ToString();
+        ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
+
         //UI SHOWS STATES
         if (FoodEnemyWalls == 1)
         {
             StateT.text = "Searching Food..";
+            StateTT.text = "Searching Food..";
         }
         if (FoodEnemyWalls == 2)
         {
             StateT.text = "Searching Enemies..";
+            StateTT.text = "Searching Enemies..";
         }
         if (FoodEnemyWalls == 3)
         {
             StateT.text = "Avoiding Walls..";
+            StateTT.text = "Avoiding Walls..";
         }
 
 
