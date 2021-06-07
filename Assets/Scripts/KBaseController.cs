@@ -29,6 +29,8 @@ public class KBaseController : BaseController
     public Text nameTT;
     public Text StateTT;
 
+    public GameObject explosionVFX;
+
     private int FoodEnemyWalls;
 
     // Start is called before the first frame update
@@ -90,8 +92,12 @@ public class KBaseController : BaseController
 
         if (!alive)
         {
+            GameObject tempEplosionFVX = Instantiate(explosionVFX);
+            tempEplosionFVX.transform.position = gameObject.transform.position;
+            tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             nameT.color = Color.red;
             nameTT.color = Color.red;
+            Destroy(tempEplosionFVX, 02f);
             Destroy(gameObject);
         }
     }

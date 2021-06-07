@@ -29,6 +29,8 @@ public class GBaseController : BaseController
     public Text nameTT;
     public Text StateTT;
 
+    public GameObject explosionVFX;
+
     public List<GameObject> boundaries;
     private int FoodEnemyWalls = 0;
 
@@ -93,7 +95,12 @@ public class GBaseController : BaseController
 
         if (!alive)
         {
+            GameObject tempEplosionFVX = Instantiate(explosionVFX);
+            tempEplosionFVX.transform.position = gameObject.transform.position;
+            tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             nameT.color = Color.red;
+            nameTT.color = Color.red;
+            Destroy(tempEplosionFVX, 02f);
             Destroy(gameObject);
         }
     }

@@ -29,6 +29,8 @@ public class BrandonController : BaseController
     public Text nameTT;
     public Text StateTT;
 
+    public GameObject explosionVFX;
+
     public List<GameObject> boundaries;
 
     public SphereCollider collider;
@@ -84,8 +86,12 @@ public class BrandonController : BaseController
 
         if (!alive)
         {
+            GameObject tempEplosionFVX = Instantiate(explosionVFX);
+            tempEplosionFVX.transform.position = gameObject.transform.position;
+            tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             nameT.color = Color.red;
             nameTT.color = Color.red;
+            Destroy(tempEplosionFVX, 02f);
             Destroy(gameObject);
         }
     }

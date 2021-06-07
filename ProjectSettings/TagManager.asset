@@ -51,6 +51,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: PlayCanvas
+    uniqueID: 987445321
+    locked: 0
+  - name: MainCanvas
+    uniqueID: 2627156101
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
