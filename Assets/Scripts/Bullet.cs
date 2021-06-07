@@ -6,6 +6,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject bullet;
+    public AudioController audioController;
+
+    public void Start()
+    {
+        audioController.Shoot();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

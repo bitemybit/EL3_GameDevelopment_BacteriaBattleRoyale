@@ -1767,6 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 352688354}
+  audioController: {fileID: 1166144525}
 --- !u!1 &353888015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,6 +4018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1022922583}
+  audioController: {fileID: 1166144525}
 --- !u!1 &1041593954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,9 +4638,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 171d8e2b1b06aff4491038c5fcd1225d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9b749f156f2b19f4baa79bdd057acf97, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.17
+  m_Volume: 0.049
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4750,6 +4752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bacteriaDiedSound: {fileID: 8300000, guid: 171d8e2b1b06aff4491038c5fcd1225d, type: 3}
   gameOverSound: {fileID: 8300000, guid: 21659480e37d4a5489be214324129873, type: 3}
+  shootSound: {fileID: 8300000, guid: 9b749f156f2b19f4baa79bdd057acf97, type: 3}
 --- !u!1 &1173691489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5416,6 +5419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1360341507}
+  audioController: {fileID: 1166144525}
 --- !u!1 &1394718094
 GameObject:
   m_ObjectHideFlags: 0
@@ -6127,7 +6131,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8953,3 +8957,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2131702062}
+  audioController: {fileID: 1166144525}

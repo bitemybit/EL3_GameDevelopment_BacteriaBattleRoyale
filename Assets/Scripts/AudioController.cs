@@ -6,6 +6,7 @@ public class AudioController : MonoBehaviour
 {
     public AudioClip bacteriaDiedSound;
     public AudioClip gameOverSound;
+    public AudioClip shootSound;
     
     private AudioSource audioSource;
 
@@ -15,6 +16,12 @@ public class AudioController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         deadCount = 0;
+    }
+
+    public void Shoot()
+    {
+        audioSource.clip = shootSound;
+        audioSource.Play();
     }
 
     public void BacteriaDied()
