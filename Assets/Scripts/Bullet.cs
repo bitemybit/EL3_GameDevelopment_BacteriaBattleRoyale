@@ -19,12 +19,14 @@ public class Bullet : MonoBehaviour
             }
             else if (other.gameObject.GetComponent<BaseController>().armor <= 0)
             {
+                other.gameObject.GetComponent<BaseController>().armor = 0;
                 other.gameObject.GetComponent<BaseController>().health -= 5f;
             }
-            if(other.gameObject.GetComponent<BaseController>().armor < 0)
+            
+            /*if(other.gameObject.GetComponent<BaseController>().armor < 0)
             {
                 other.gameObject.GetComponent<BaseController>().armor = 0;
-            }
+            }*/
             
         }       
     }

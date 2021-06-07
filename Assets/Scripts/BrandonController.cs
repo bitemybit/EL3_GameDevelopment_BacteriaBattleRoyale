@@ -35,6 +35,8 @@ public class BrandonController : BaseController
 
     public SphereCollider collider;
 
+    public AudioController audioController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,17 +77,18 @@ public class BrandonController : BaseController
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismT.text = "Metabolism: " + metabolism.ToString();
+        metabolismT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismTT.text = "Metabolism: " + metabolism.ToString();
+        metabolismTT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         if (!alive)
         {
+            audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;
             tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();

@@ -34,6 +34,8 @@ public class GBaseController : BaseController
     public List<GameObject> boundaries;
     private int FoodEnemyWalls = 0;
 
+    public AudioController audioController;
+
     protected override void Start()
     {
         base.Start();
@@ -66,13 +68,13 @@ public class GBaseController : BaseController
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismT.text = "Metabolism: " + metabolism.ToString();
+        metabolismT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismTT.text = "Metabolism: " + metabolism.ToString();
+        metabolismTT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         //UI SHOWS STATES
@@ -95,6 +97,7 @@ public class GBaseController : BaseController
 
         if (!alive)
         {
+            audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;
             tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
@@ -111,12 +114,12 @@ public class GBaseController : BaseController
         {
             if (health >= 90 && armor >= 30 && ammo >= 10 && energy >= 70 && metabolism >= 8 && metabolism <= 13)
             {
-                Debug.Log("Searching Enemies");
+                //Debug.Log("Searching Enemies");
                 SearchForEnemies();
             }
             else
             {
-                Debug.Log("Finding Food");
+                //Debug.Log("Finding Food");
                 FindFood();
             }
         }
@@ -257,7 +260,7 @@ public class GBaseController : BaseController
     private void IgnoreWalls()
     {
         FoodEnemyWalls = 3;
-        Debug.Log("Not Going");
+        //Debug.Log("Not Going");
         navMeshAgent.SetDestination(new Vector3(0, 0, 0));
     }
 }
