@@ -208,12 +208,15 @@ public class BaseController : MonoBehaviour
 
         foreach (Transform enemy in enemiesList)
         {
-            float distanceToEnemy = Vector3.Distance(player.transform.position, enemy.transform.position);
-
-            if (distanceToEnemy < shortestRange)
+            if (enemy != null)
             {
-                shortestRange = distanceToEnemy;
-                closestEnemy = enemy;
+                float distanceToEnemy = Vector3.Distance(player.transform.position, enemy.transform.position);
+
+                if (distanceToEnemy < shortestRange)
+                {
+                    shortestRange = distanceToEnemy;
+                    closestEnemy = enemy;
+                }
             }
         }
 
@@ -221,7 +224,8 @@ public class BaseController : MonoBehaviour
         {
             inRange = true;
             target = closestEnemy.transform;
-            firePoint.LookAt(target);
+            
+            firePoint.LookAt(target);  
         }
         else
         {
