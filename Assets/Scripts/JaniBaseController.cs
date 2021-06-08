@@ -11,8 +11,16 @@ using System.Security.Cryptography;
 
 public class JaniBaseController : BaseController
 {
-    public bool travelling;
+    private int currentState = 0;
     private NavMeshAgent navMeshAgent;
+    private Vector3 levelCenter;
+
+    public List<GameObject> boundaries;
+    public bool travelling;
+
+    [Space(10)]
+    [Header("UI Variables")]
+    // Main Camera UI, Text Variables
     public Text healthT;
     public Text armorT;
     public Text energyT;
@@ -21,6 +29,11 @@ public class JaniBaseController : BaseController
     public Text nameT;
     public Text StateT;
 
+    // Main Camera UI, Player Button
+    public Text camBtnTxt;
+    public Button camBtn;
+
+    // Player Camera UI, Text Variables
     public Text healthTT;
     public Text armorTT;
     public Text energyTT;
@@ -29,25 +42,23 @@ public class JaniBaseController : BaseController
     public Text nameTT;
     public Text StateTT;
 
+    [Space(10)]
+    [Header("Prefabs")]
+    // Explosion Particle Effect Prefab
     public GameObject explosionVFX;
 
-    public List<GameObject> boundaries;
-    private int FoodEnemyWalls = 0;
-
+    [Space(10)]
+    [Header("External Scripts")]
+    // External Scripts
     public AudioController audioController;
     public CameraManager cameraManager;
-
-    public Text camBtnTxt;
-    public Button camBtn;
 
     protected override void Start()
     {
         base.Start();
         navMeshAgent = this.GetComponent<NavMeshAgent>();
-        boundaries.Add(GameObject.Find("TopBoundary"));
-        boundaries.Add(GameObject.Find("BotBoundary"));
-        boundaries.Add(GameObject.Find("LeftBoundary"));
-        boundaries.Add(GameObject.Find("RightBoundary"));
+        FindBoundaries();
+        levelCenter = new Vector3(0, 0, 0);
     }
 
     protected override void Update()
@@ -60,71 +71,90 @@ public class JaniBaseController : BaseController
         }
         else
         {
-            SwitchState();
+            NextAction();
         }
 
         if (travelling && navMeshAgent.isStopped == true)
         {
             travelling = false;
-            SwitchState();
+            NextAction();
         }
 
+        // Main Camera UI Text Updates
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismT.text = "Metabolism: " + metabolism.ToString("F2"); //
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
+        // Player Camera UI Text Updates
         healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismTT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismTT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
-        //UI SHOWS STATES
-        if (FoodEnemyWalls == 1)
+        // UI Current State Update
+        if (currentState == 1)
         {
             StateT.text = "Searching Food..";
             StateTT.text = "Searching Food..";
         }
-        if (FoodEnemyWalls == 2)
+        if (currentState == 2)
         {
             StateT.text = "Searching Enemies..";
             StateTT.text = "Searching Enemies..";
         }
-        if (FoodEnemyWalls == 3)
+        if (currentState == 3)
         {
             StateT.text = "Avoiding Walls..";
             StateTT.text = "Avoiding Walls..";
         }
 
-
+        // On Bacteria Death
         if (!alive)
         {
-            cameraManager.SwitchCam(0);
             cameraManager.janiAlive = false;
-            audioController.BacteriaDied();
-            GameObject tempEplosionFVX = Instantiate(explosionVFX);
-            tempEplosionFVX.transform.position = gameObject.transform.position;
-            tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
+            cameraManager.SwitchCam(0); // Switch to Main Camera
+
+            // UI Update & Disable Player Camera Button
             nameT.color = Color.red;
             nameTT.color = Color.red;
             camBtnTxt.color = Color.red;
             camBtn.interactable = false;
+
+            audioController.BacteriaDied(); // Play Death Sound FX
+
+            // Play Death Particle FX
+            GameObject tempEplosionFVX = Instantiate(explosionVFX);
+            tempEplosionFVX.transform.position = gameObject.transform.position;
+            tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             Destroy(tempEplosionFVX, 02f);
-            this.gameObject.SetActive(false);
-            //Destroy(gameObject);
+            
+            this.gameObject.SetActive(false); // Disable Game Object
         }
     }
 
+    // Find Level Boundaries
+    public void FindBoundaries()
+    {
+        boundaries.Add(GameObject.Find("TopBoundary"));
+        boundaries.Add(GameObject.Find("BotBoundary"));
+        boundaries.Add(GameObject.Find("LeftBoundary"));
+        boundaries.Add(GameObject.Find("RightBoundary"));
+    }
+
+    // Remove Dead Bacteria from List of Enemies
     public void RemoveEnemy(int id)
     {
         enemiesList[id] = null;
     }
 
-    private void SwitchState()
+    // Determine Next Move
+    private void NextAction()
     {
-        if (transform.position.x <= boundaries[3].transform.position.x - 70 && transform.position.x > boundaries[2].transform.position.x + 70 && transform.position.x >= boundaries[1].transform.position.z + 70 && transform.position.z <= boundaries[0].transform.position.z - 70)
+        if (transform.position.x <= boundaries[3].transform.position.x - 50 && transform.position.x > boundaries[2].transform.position.x + 50 && 
+            transform.position.x >= boundaries[1].transform.position.z + 50 && transform.position.z <= boundaries[0].transform.position.z - 50)
         {
             if (health >= 90 && armor >= 30 && ammo >= 10 && energy >= 70 && metabolism >= 8 && metabolism <= 13)
             {
@@ -139,14 +169,14 @@ public class JaniBaseController : BaseController
         }
         else
         {
-            IgnoreWalls();
+            MoveToCenter();
         }
 
     }
 
     private void FindFood()
     {
-        FoodEnemyWalls = 1;
+        currentState = 1;
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
 
@@ -267,14 +297,13 @@ public class JaniBaseController : BaseController
 
     private void SearchForEnemies()
     {
-        FoodEnemyWalls = 2;
+        currentState = 2;
         Vector3 targetVector = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), Random.Range(-100, 100));
         navMeshAgent.SetDestination(targetVector);
     }
-    private void IgnoreWalls()
+    private void MoveToCenter()
     {
-        FoodEnemyWalls = 3;
-        //Debug.Log("Not Going");
-        navMeshAgent.SetDestination(new Vector3(0, 0, 0));
+        currentState = 3;
+        navMeshAgent.SetDestination(levelCenter);
     }
 }

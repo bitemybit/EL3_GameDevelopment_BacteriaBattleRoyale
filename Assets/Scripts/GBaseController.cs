@@ -72,13 +72,13 @@ public class GBaseController : BaseController
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismTT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismTT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         //UI SHOWS STATES
