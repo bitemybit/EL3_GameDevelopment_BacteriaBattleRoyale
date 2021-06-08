@@ -1355,10 +1355,10 @@ MonoBehaviour:
   firePoint: {fileID: 1502733880}
   targetE: {fileID: 0}
   enemiesList:
-  - {fileID: 531641843}
   - {fileID: 1950653947}
+  - {fileID: 531641843}
   - {fileID: 936683429}
-  bullet: {fileID: 2131702062}
+  bullet: {fileID: 1360341507}
   metabolism: 10
   maxHealth: 0
   health: 100
@@ -4270,7 +4270,7 @@ MonoBehaviour:
   - {fileID: 1950653947}
   - {fileID: 531641843}
   - {fileID: 230761188}
-  bullet: {fileID: 2131702062}
+  bullet: {fileID: 352688354}
   metabolism: 10
   maxHealth: 0
   health: 100
@@ -7174,6 +7174,10 @@ MonoBehaviour:
   janiAlive: 0
   winnerText: {fileID: 1510645800}
   winnerDisplayed: 0
+  janiBaseController: {fileID: 936683430}
+  kaanBaseController: {fileID: 1950653950}
+  brandonBaseController: {fileID: 230761189}
+  gokhanBaseController: {fileID: 531641851}
 --- !u!82 &1604125321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9081,10 +9085,10 @@ MonoBehaviour:
   firePoint: {fileID: 1631281447}
   targetE: {fileID: 0}
   enemiesList:
-  - {fileID: 230761188}
   - {fileID: 531641843}
+  - {fileID: 230761188}
   - {fileID: 936683429}
-  bullet: {fileID: 2131702062}
+  bullet: {fileID: 1022922583}
   metabolism: 10
   maxHealth: 0
   health: 100

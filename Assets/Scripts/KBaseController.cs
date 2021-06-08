@@ -114,6 +114,11 @@ public class KBaseController : BaseController
         }
     }
 
+    public void RemoveEnemy(int id)
+    {
+        enemiesList[id] = null;
+    }
+
     private void DestinationF()
     {
         FoodEnemyWalls = 1;

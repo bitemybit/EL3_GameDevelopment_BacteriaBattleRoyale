@@ -108,6 +108,11 @@ public class BrandonController : BaseController
         }
     }
 
+    public void RemoveEnemy(int id)
+    {
+        enemiesList[id] = null;
+    }
+
     private void GoToCenter()
     {
         StateT.text = "Avoiding Walls...";

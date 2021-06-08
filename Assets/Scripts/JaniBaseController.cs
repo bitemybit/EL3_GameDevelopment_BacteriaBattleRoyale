@@ -117,6 +117,11 @@ public class JaniBaseController : BaseController
         }
     }
 
+    public void RemoveEnemy(int id)
+    {
+        enemiesList[id] = null;
+    }
+
     private void SwitchState()
     {
         if (transform.position.x <= boundaries[3].transform.position.x - 70 && transform.position.x > boundaries[2].transform.position.x + 70 && transform.position.x >= boundaries[1].transform.position.z + 70 && transform.position.z <= boundaries[0].transform.position.z - 70)

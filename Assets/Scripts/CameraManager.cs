@@ -24,6 +24,11 @@ public class CameraManager : MonoBehaviour
 
     public bool winnerDisplayed;
 
+    public JaniBaseController janiBaseController;
+    public KBaseController kaanBaseController;
+    public BrandonController brandonBaseController;
+    public GBaseController gokhanBaseController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +55,34 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!kaanAlive)
+        {
+            janiBaseController.RemoveEnemy(0);
+            brandonBaseController.RemoveEnemy(0);
+            gokhanBaseController.RemoveEnemy(0);
+        }
+
+        if (!gokhanAlive)
+        {
+            janiBaseController.RemoveEnemy(1);
+            brandonBaseController.RemoveEnemy(1);
+            kaanBaseController.RemoveEnemy(0);
+        }
+
+        if (!brandonAlive)
+        {
+            janiBaseController.RemoveEnemy(2);
+            gokhanBaseController.RemoveEnemy(1);
+            kaanBaseController.RemoveEnemy(1);
+        }
+
+        if (!janiAlive)
+        {
+            brandonBaseController.RemoveEnemy(2);
+            gokhanBaseController.RemoveEnemy(2);
+            kaanBaseController.RemoveEnemy(2);
+        }
+
         if (!brandonAlive && !kaanAlive && !gokhanAlive && janiAlive && !winnerDisplayed)
         {
             winnerDisplayed = true;
