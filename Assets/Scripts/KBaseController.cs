@@ -34,6 +34,10 @@ public class KBaseController : BaseController
     private int FoodEnemyWalls;
 
     public AudioController audioController;
+    public CameraManager cameraManager;
+
+    public Text camBtnTxt;
+    public Button camBtn;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -94,14 +98,18 @@ public class KBaseController : BaseController
 
         if (!alive)
         {
+            cameraManager.SwitchCam(0);
             audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;
             tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             nameT.color = Color.red;
             nameTT.color = Color.red;
+            camBtnTxt.color = Color.red;
+            camBtn.interactable = false;
             Destroy(tempEplosionFVX, 02f);
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 

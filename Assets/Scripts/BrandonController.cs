@@ -36,6 +36,10 @@ public class BrandonController : BaseController
     public SphereCollider collider;
 
     public AudioController audioController;
+    public CameraManager cameraManager;
+
+    public Text camBtnTxt;
+    public Button camBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -77,25 +81,29 @@ public class BrandonController : BaseController
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         healthTT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorTT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
         energyTT.text = "Energy: " + Mathf.RoundToInt(energy).ToString();
-        metabolismTT.text = "Metabolism: " + Mathf.RoundToInt(metabolism).ToString();
+        metabolismTT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
         if (!alive)
         {
+            cameraManager.SwitchCam(0);
             audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;
             tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             nameT.color = Color.red;
             nameTT.color = Color.red;
+            camBtnTxt.color = Color.red;
+            camBtn.interactable = false;
             Destroy(tempEplosionFVX, 02f);
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 

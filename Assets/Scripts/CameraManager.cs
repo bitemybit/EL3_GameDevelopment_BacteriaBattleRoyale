@@ -11,6 +11,8 @@ public class CameraManager : MonoBehaviour
     public Canvas kaanCanvas;
     public Camera gokhanCamera;
     public Canvas gokhanCanvas;
+    public Camera janiCamera;
+    public Canvas janiCanvas;
 
 
     // Start is called before the first frame update
@@ -23,6 +25,8 @@ public class CameraManager : MonoBehaviour
         kaanCanvas.enabled = false;
         gokhanCamera.enabled = false;
         gokhanCanvas.enabled = false;
+        janiCamera.enabled = false;
+        janiCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -43,6 +47,8 @@ public class CameraManager : MonoBehaviour
                     kaanCanvas.enabled = false;
                     gokhanCamera.enabled = false;
                     gokhanCanvas.enabled = false;
+                    janiCamera.enabled = false;
+                    janiCanvas.enabled = false;
                     mainCamera.enabled = true;
                     break;
                 }
@@ -54,6 +60,8 @@ public class CameraManager : MonoBehaviour
                     brandonCanvas.enabled = false;
                     gokhanCamera.enabled = false;
                     gokhanCanvas.enabled = false;
+                    janiCamera.enabled = false;
+                    janiCanvas.enabled = false;
                     kaanCamera.enabled = true;
                     kaanCanvas.enabled = true;
                     break;
@@ -66,6 +74,8 @@ public class CameraManager : MonoBehaviour
                     gokhanCanvas.enabled = false;
                     kaanCamera.enabled = false;
                     kaanCanvas.enabled = false;
+                    janiCamera.enabled = false;
+                    janiCanvas.enabled = false;
                     brandonCamera.enabled = true;
                     brandonCanvas.enabled = true;
                     break;
@@ -78,8 +88,24 @@ public class CameraManager : MonoBehaviour
                     kaanCanvas.enabled = false;
                     brandonCamera.enabled = false;
                     brandonCanvas.enabled = false;
+                    janiCamera.enabled = false;
+                    janiCanvas.enabled = false;
                     gokhanCamera.enabled = true;
                     gokhanCanvas.enabled = true;
+                    break;
+                }
+
+            case 4:
+                {
+                    mainCamera.enabled = false;
+                    kaanCamera.enabled = false;
+                    kaanCanvas.enabled = false;
+                    brandonCamera.enabled = false;
+                    brandonCanvas.enabled = false;
+                    gokhanCamera.enabled = false;
+                    gokhanCanvas.enabled = false;
+                    janiCamera.enabled = true;
+                    janiCanvas.enabled = true;
                     break;
                 }
 

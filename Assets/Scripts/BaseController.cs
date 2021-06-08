@@ -79,7 +79,8 @@ public class BaseController : MonoBehaviour
         if (health <= 0)
         {
             alive = false;
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 

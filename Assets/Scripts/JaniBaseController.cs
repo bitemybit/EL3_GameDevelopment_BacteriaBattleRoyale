@@ -9,7 +9,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Security.Cryptography;
 
-public class GBaseController : BaseController
+public class JaniBaseController : BaseController
 {
     public bool travelling;
     private NavMeshAgent navMeshAgent;
@@ -135,7 +135,7 @@ public class GBaseController : BaseController
         {
             IgnoreWalls();
         }
-        
+
     }
 
     private void FindFood()
@@ -144,119 +144,119 @@ public class GBaseController : BaseController
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
 
-            //health
-            if (health < 90)
+        //health
+        if (health < 90)
+        {
+            GameObject[] hFood = GameObject.FindGameObjectsWithTag("Health");
+
+            for (var i = 0; i < hFood.Length; i++)
             {
-                GameObject[] hFood = GameObject.FindGameObjectsWithTag("Health");
-
-                for (var i = 0; i < hFood.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, hFood[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, hFood[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = hFood[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = hFood[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
 
-            //armor
-            if (health >= 90 && armor < 30)
+        //armor
+        if (health >= 90 && armor < 30)
+        {
+            GameObject[] aFood = GameObject.FindGameObjectsWithTag("Armor");
+
+            for (var i = 0; i < aFood.Length; i++)
             {
-                GameObject[] aFood = GameObject.FindGameObjectsWithTag("Armor");
-
-                for (var i = 0; i < aFood.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, aFood[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, aFood[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = aFood[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = aFood[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
 
-            //ammo
-            if (health >= 90 && armor >= 30 && ammo < 10)
+        //ammo
+        if (health >= 90 && armor >= 30 && ammo < 10)
+        {
+            GameObject[] amFood = GameObject.FindGameObjectsWithTag("Ammo");
+
+            for (var i = 0; i < amFood.Length; i++)
             {
-                GameObject[] amFood = GameObject.FindGameObjectsWithTag("Ammo");
-
-                for (var i = 0; i < amFood.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, amFood[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, amFood[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = amFood[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = amFood[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
 
-            //Energy
-            if (health >= 70 && energy < 70)
+        //Energy
+        if (health >= 70 && energy < 70)
+        {
+            GameObject[] eFood = GameObject.FindGameObjectsWithTag("Energy");
+
+            for (var i = 0; i < eFood.Length; i++)
             {
-                GameObject[] eFood = GameObject.FindGameObjectsWithTag("Energy");
-
-                for (var i = 0; i < eFood.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, eFood[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, eFood[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = eFood[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = eFood[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
 
-            //MetaPlus
-            if (health >= 90 && armor >= 30 && metabolism < 8)
+        //MetaPlus
+        if (health >= 90 && armor >= 30 && metabolism < 8)
+        {
+            GameObject[] mFood = GameObject.FindGameObjectsWithTag("MetaPlus");
+
+            for (var i = 0; i < mFood.Length; i++)
             {
-                GameObject[] mFood = GameObject.FindGameObjectsWithTag("MetaPlus");
-
-                for (var i = 0; i < mFood.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, mFood[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, mFood[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = mFood[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = mFood[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
 
-            //MetaMin
-            if (health >= 90 && armor >= 30 && metabolism >= 12)
+        //MetaMin
+        if (health >= 90 && armor >= 30 && metabolism >= 12)
+        {
+            GameObject[] m2Food = GameObject.FindGameObjectsWithTag("MetaMin");
+
+            for (var i = 0; i < m2Food.Length; i++)
             {
-                GameObject[] m2Food = GameObject.FindGameObjectsWithTag("MetaMin");
-
-                for (var i = 0; i < m2Food.Length; i++)
+                float dist = Vector3.Distance(player.transform.position, m2Food[i].transform.position);
+                if (dist < closestRange)
                 {
-                    float dist = Vector3.Distance(player.transform.position, m2Food[i].transform.position);
-                    if (dist < closestRange)
-                    {
-                        closestRange = dist;
-                        closestFood = m2Food[i];
-                    }
-                    Vector3 targetVector = closestFood.transform.position;
-                    navMeshAgent.SetDestination(targetVector);
-                    travelling = true;
+                    closestRange = dist;
+                    closestFood = m2Food[i];
                 }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
             }
+        }
     }
 
     private void SearchForEnemies()
