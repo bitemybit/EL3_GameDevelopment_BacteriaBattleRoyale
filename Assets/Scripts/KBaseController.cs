@@ -99,6 +99,7 @@ public class KBaseController : BaseController
         if (!alive)
         {
             cameraManager.SwitchCam(0);
+            cameraManager.kaanAlive = false;
             audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;

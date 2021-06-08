@@ -93,6 +93,7 @@ public class BrandonController : BaseController
         if (!alive)
         {
             cameraManager.SwitchCam(0);
+            cameraManager.brandonAlive = false;
             audioController.BacteriaDied();
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;

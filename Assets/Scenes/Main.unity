@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.47843137, b: 0.2784314, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1313,7 +1313,7 @@ GameObject:
   - component: {fileID: 230761191}
   - component: {fileID: 230761190}
   - component: {fileID: 230761189}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Brandon
   m_TagString: Bacteria
   m_Icon: {fileID: 0}
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   - {fileID: 531641843}
   - {fileID: 1950653947}
   - {fileID: 936683429}
-  bullet: {fileID: 1360341507}
+  bullet: {fileID: 2131702062}
   metabolism: 10
   maxHealth: 0
   health: 100
@@ -2274,7 +2274,7 @@ GameObject:
   - component: {fileID: 398648684}
   - component: {fileID: 398648686}
   - component: {fileID: 398648685}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: FirePoint
   m_Icon: {fileID: 0}
@@ -3643,6 +3643,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 12100481}
+  - {fileID: 1510645799}
   - {fileID: 1592840501}
   - {fileID: 1041593955}
   - {fileID: 2128261597}
@@ -4224,7 +4225,7 @@ GameObject:
   - component: {fileID: 936683432}
   - component: {fileID: 936683431}
   - component: {fileID: 936683430}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Jani
   m_TagString: Bacteria
   m_Icon: {fileID: 0}
@@ -4269,7 +4270,7 @@ MonoBehaviour:
   - {fileID: 1950653947}
   - {fileID: 531641843}
   - {fileID: 230761188}
-  bullet: {fileID: 352688354}
+  bullet: {fileID: 2131702062}
   metabolism: 10
   maxHealth: 0
   health: 100
@@ -4738,7 +4739,7 @@ RectTransform:
   m_Children:
   - {fileID: 1696137719}
   m_Father: {fileID: 751059898}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6585,7 +6586,7 @@ GameObject:
   - component: {fileID: 1502733880}
   - component: {fileID: 1502733882}
   - component: {fileID: 1502733881}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: FirePoint
   m_Icon: {fileID: 0}
@@ -6627,6 +6628,83 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502733879}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1510645798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510645799}
+  - component: {fileID: 1510645801}
+  - component: {fileID: 1510645800}
+  m_Layer: 5
+  m_Name: Winner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1510645799
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510645798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 751059898}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 12, y: 2}
+  m_SizeDelta: {x: 474.1, y: 53.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1510645800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510645798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d73cf4e3851d2704caf1e5ad85da36b2, type: 3}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 32
+    m_MaxSize: 112
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Winner!
+--- !u!222 &1510645801
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510645798}
+  m_CullTransparentMesh: 0
 --- !u!1 &1512079548
 GameObject:
   m_ObjectHideFlags: 0
@@ -6919,7 +6997,7 @@ RectTransform:
   m_Children:
   - {fileID: 224762056}
   m_Father: {fileID: 751059898}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7090,6 +7168,12 @@ MonoBehaviour:
   gokhanCanvas: {fileID: 224924501}
   janiCamera: {fileID: 1763144698}
   janiCanvas: {fileID: 236705529}
+  brandonAlive: 0
+  kaanAlive: 0
+  gokhanAlive: 0
+  janiAlive: 0
+  winnerText: {fileID: 1510645800}
+  winnerDisplayed: 0
 --- !u!82 &1604125321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7197,7 +7281,7 @@ GameObject:
   - component: {fileID: 1630524635}
   - component: {fileID: 1630524637}
   - component: {fileID: 1630524636}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: CameraG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7386,7 +7470,7 @@ GameObject:
   - component: {fileID: 1654984032}
   - component: {fileID: 1654984034}
   - component: {fileID: 1654984033}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: CameraB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7977,7 +8061,7 @@ GameObject:
   - component: {fileID: 1763144700}
   - component: {fileID: 1763144698}
   - component: {fileID: 1763144699}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: CameraG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9000,7 +9084,7 @@ MonoBehaviour:
   - {fileID: 230761188}
   - {fileID: 531641843}
   - {fileID: 936683429}
-  bullet: {fileID: 1022922583}
+  bullet: {fileID: 2131702062}
   metabolism: 10
   maxHealth: 0
   health: 100
@@ -9352,7 +9436,7 @@ RectTransform:
   m_Children:
   - {fileID: 2075344330}
   m_Father: {fileID: 751059898}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9906,7 +9990,7 @@ RectTransform:
   m_Children:
   - {fileID: 1075827230}
   m_Father: {fileID: 751059898}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
