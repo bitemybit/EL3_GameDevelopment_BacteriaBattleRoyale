@@ -153,73 +153,36 @@ public class JaniBaseController : BaseController
     // Determine Next Move
     private void NextAction()
     {
-        if (transform.position.x <= boundaries[3].transform.position.x - 50 && transform.position.x > boundaries[2].transform.position.x + 50 && 
-            transform.position.x >= boundaries[1].transform.position.z + 50 && transform.position.z <= boundaries[0].transform.position.z - 50)
+        // Check Distance to Boundaries, If Below 45 -> Avoid Walls
+        if (transform.position.x <= boundaries[3].transform.position.x - 65 && transform.position.x > boundaries[2].transform.position.x + 65 && 
+            transform.position.x >= boundaries[1].transform.position.z + 65 && transform.position.z <= boundaries[0].transform.position.z - 65) 
         {
-            if (health >= 90 && armor >= 30 && ammo >= 10 && energy >= 70 && metabolism >= 8 && metabolism <= 13)
+            // If Food Needs Met -> Find Nearby Enemies
+            if (ammo >= 30 && armor >= 20 && energy >= 65 && health >= 75 && metabolism >= 9)
             {
-                //Debug.Log("Searching Enemies");
                 SearchForEnemies();
             }
-            else
+            else // Find Nearby Food
             {
-                //Debug.Log("Finding Food");
-                FindFood();
+                SearchForFood();
             }
         }
-        else
+        else // Go to Game Area Center
         {
-            MoveToCenter();
+            SearchForCenter();
         }
 
     }
 
-    private void FindFood()
+    // Find Specific Food Types based on Current Values
+    private void SearchForFood()
     {
         currentState = 1;
         float closestRange = Mathf.Infinity;
         GameObject closestFood = null;
 
-        //health
-        if (health < 90)
-        {
-            GameObject[] hFood = GameObject.FindGameObjectsWithTag("Health");
-
-            for (var i = 0; i < hFood.Length; i++)
-            {
-                float dist = Vector3.Distance(player.transform.position, hFood[i].transform.position);
-                if (dist < closestRange)
-                {
-                    closestRange = dist;
-                    closestFood = hFood[i];
-                }
-                Vector3 targetVector = closestFood.transform.position;
-                navMeshAgent.SetDestination(targetVector);
-                travelling = true;
-            }
-        }
-
-        //armor
-        if (health >= 90 && armor < 30)
-        {
-            GameObject[] aFood = GameObject.FindGameObjectsWithTag("Armor");
-
-            for (var i = 0; i < aFood.Length; i++)
-            {
-                float dist = Vector3.Distance(player.transform.position, aFood[i].transform.position);
-                if (dist < closestRange)
-                {
-                    closestRange = dist;
-                    closestFood = aFood[i];
-                }
-                Vector3 targetVector = closestFood.transform.position;
-                navMeshAgent.SetDestination(targetVector);
-                travelling = true;
-            }
-        }
-
-        //ammo
-        if (health >= 90 && armor >= 30 && ammo < 10)
+        // Search for Type Ammo Food
+        if (ammo < 30)
         {
             GameObject[] amFood = GameObject.FindGameObjectsWithTag("Ammo");
 
@@ -237,8 +200,27 @@ public class JaniBaseController : BaseController
             }
         }
 
-        //Energy
-        if (health >= 70 && energy < 70)
+        // Search for Type Armor Food
+        if (ammo >= 30 && armor < 20)
+        {
+            GameObject[] aFood = GameObject.FindGameObjectsWithTag("Armor");
+
+            for (var i = 0; i < aFood.Length; i++)
+            {
+                float dist = Vector3.Distance(player.transform.position, aFood[i].transform.position);
+                if (dist < closestRange)
+                {
+                    closestRange = dist;
+                    closestFood = aFood[i];
+                }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
+            }
+        }
+
+        // Search for Type Energy Food
+        if (ammo >= 30 && armor >= 20 && energy < 65)
         {
             GameObject[] eFood = GameObject.FindGameObjectsWithTag("Energy");
 
@@ -256,8 +238,27 @@ public class JaniBaseController : BaseController
             }
         }
 
-        //MetaPlus
-        if (health >= 90 && armor >= 30 && metabolism < 8)
+        // Search for Type Health Food
+        if (ammo >= 30 && armor >= 20 && energy >= 65 && health < 75)
+        {
+            GameObject[] hFood = GameObject.FindGameObjectsWithTag("Health");
+
+            for (var i = 0; i < hFood.Length; i++)
+            {
+                float dist = Vector3.Distance(player.transform.position, hFood[i].transform.position);
+                if (dist < closestRange)
+                {
+                    closestRange = dist;
+                    closestFood = hFood[i];
+                }
+                Vector3 targetVector = closestFood.transform.position;
+                navMeshAgent.SetDestination(targetVector);
+                travelling = true;
+            }
+        }
+
+        // Search for Type + Metabolism Food
+        if (ammo >= 30 && armor >= 20 && energy >= 65 && health >= 75 && metabolism < 9)
         {
             GameObject[] mFood = GameObject.FindGameObjectsWithTag("MetaPlus");
 
@@ -274,36 +275,22 @@ public class JaniBaseController : BaseController
                 travelling = true;
             }
         }
-
-        //MetaMin
-        if (health >= 90 && armor >= 30 && metabolism >= 12)
-        {
-            GameObject[] m2Food = GameObject.FindGameObjectsWithTag("MetaMin");
-
-            for (var i = 0; i < m2Food.Length; i++)
-            {
-                float dist = Vector3.Distance(player.transform.position, m2Food[i].transform.position);
-                if (dist < closestRange)
-                {
-                    closestRange = dist;
-                    closestFood = m2Food[i];
-                }
-                Vector3 targetVector = closestFood.transform.position;
-                navMeshAgent.SetDestination(targetVector);
-                travelling = true;
-            }
-        }
     }
 
+    // Find Nearby Enemy Bacteria
     private void SearchForEnemies()
     {
         currentState = 2;
         Vector3 targetVector = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), Random.Range(-100, 100));
         navMeshAgent.SetDestination(targetVector);
     }
-    private void MoveToCenter()
+
+    // Travel to Center of Game Area
+    private void SearchForCenter()
     {
         currentState = 3;
         navMeshAgent.SetDestination(levelCenter);
     }
 }
+
+

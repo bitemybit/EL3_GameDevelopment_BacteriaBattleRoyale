@@ -35,11 +35,8 @@ public class BaseController : MonoBehaviour
     private IEnumerator currentMoveCoroutine;
     public GameObject gameManager;
     private float initHealth;
-
     public bool alive = true;
-    //public List<FoodType> foodTypes = new List<FoodType>();
 
-    // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,19 +44,13 @@ public class BaseController : MonoBehaviour
         initHealth = health;
         energyDepletion = (1 / metabolism) * 10;
         StartCoroutine(_loseEnergy());
-        //gameManager.GetComponent<CameraManager>().agentCameras.Add(camera);
-        //StartCoroutine(_idle());
         inRange = false;
         InvokeRepeating("ShootEnemy", 0f, 0.5f);
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
- 
-
         StartCoroutine(_chooseTarget());
-        //GameObject.Find("GameManager").GetComponent<GameManager>().constrainZ(transform);
         energyDepletion = metabolism / 10;
         speed = (metabolism / 2) * scaleModifier;
         maxHealth = (1 / metabolism) * 1000;
@@ -80,7 +71,6 @@ public class BaseController : MonoBehaviour
         {
             alive = false;
             this.gameObject.SetActive(false);
-            //Destroy(gameObject);
         }
     }
 
@@ -89,7 +79,6 @@ public class BaseController : MonoBehaviour
         if (other.GetComponent<Food>() != null)
         {
             target = other.transform;
-            // Debug.Log("Found Food");
         }
     }
 
@@ -125,11 +114,6 @@ public class BaseController : MonoBehaviour
                             var ratio = (health / maxHealth);
                             scaleModifier = (1 / metabolism) * 10 * ratio;
                             gameObject.transform.localScale += new Vector3(scaleModifier, scaleModifier, scaleModifier);
-
-                            if (gameObject.transform.localScale.x < maxSize / 4)
-                            {
-                                //camera.transform.position += new Vector3(0, 0.5f, 0);
-                            }
                         }
                     }
                     break;
@@ -140,7 +124,6 @@ public class BaseController : MonoBehaviour
                         {
                             metabolism -= food.foodValue;
                         }
-                        //gameObject.transform.localScale += new Vector3(scaleModifier, scaleModifier,scaleModifier);
                     }
                     else
                     {
@@ -148,7 +131,6 @@ public class BaseController : MonoBehaviour
                         {
                             metabolism += food.foodValue;
                         }
-                        //gameObject.transform.localScale = new Vector3(transform.localScale.x - scaleModifier, transform.localScale.y - scaleModifier,transform.localScale.z - scaleModifier);
                     }
                     break;
             }
@@ -235,43 +217,6 @@ public class BaseController : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
     }
-
-   
-        /*
-        public IEnumerator _idle()
-        {
-            while (idle)
-            {
-                var pos = new Vector3(0, 0, 0);
-                var timeTo = 0f;
-
-                if (target != null)
-                {
-                    pos = target.transform.position;
-                    if (currentMoveCoroutine != null)
-                    {
-                        StopCoroutine(currentMoveCoroutine);
-                    }
-                    currentMoveCoroutine = _move(pos);
-                    yield return StartCoroutine(currentMoveCoroutine);
-                }
-                else
-                {
-                    pos = new Vector3(Random.Range(-10, 30), Random.Range(-10, 30), 0);
-                    timeTo = (Vector3.Distance(transform.position, pos) / speed);
-
-                    if (currentMoveCoroutine != null)
-                    {
-                        StopCoroutine(currentMoveCoroutine);
-                    }
-                    currentMoveCoroutine = _move(pos);
-                    StartCoroutine(currentMoveCoroutine);
-
-                    yield return new WaitForSeconds(timeTo);
-                }
-            }
-        }
-        */
 }
 
 

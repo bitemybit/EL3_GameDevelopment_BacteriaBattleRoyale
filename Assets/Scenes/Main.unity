@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b9bfd61a902d44dade672aba3eb947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1500
+  shootForce: 1750
   shootRange: 35
   inRange: 0
   player: {fileID: 230761188}
@@ -2983,7 +2983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7415c6acf4e5b264bafaf3990b37ef00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1500
+  shootForce: 1750
   shootRange: 35
   inRange: 0
   player: {fileID: 531641843}
@@ -4260,7 +4260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf9a46dc0b9e0b4a8c458a2bee8b7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1500
+  shootForce: 1750
   shootRange: 35
   inRange: 0
   player: {fileID: 936683429}
@@ -4288,6 +4288,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   gameManager: {fileID: 1604125317}
   alive: 1
+  boundaries: []
   travelling: 0
   healthT: {fileID: 353888017}
   armorT: {fileID: 1830453485}
@@ -4296,6 +4297,8 @@ MonoBehaviour:
   ammoT: {fileID: 1913001598}
   nameT: {fileID: 2056262256}
   StateT: {fileID: 1686270811}
+  camBtnTxt: {fileID: 2075344331}
+  camBtn: {fileID: 1994597712}
   healthTT: {fileID: 1512079549}
   armorTT: {fileID: 545081015}
   energyTT: {fileID: 2062858972}
@@ -4305,11 +4308,8 @@ MonoBehaviour:
   StateTT: {fileID: 17671280}
   explosionVFX: {fileID: 3426486354618867409, guid: 260ca13d49ea08b448c29baba33c4841,
     type: 3}
-  boundaries: []
   audioController: {fileID: 1166144525}
   cameraManager: {fileID: 1604125320}
-  camBtnTxt: {fileID: 2075344331}
-  camBtn: {fileID: 1994597712}
 --- !u!195 &936683431
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9078,7 +9078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d854ca4b7d995234ab0c73bc7450a66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1500
+  shootForce: 1750
   shootRange: 35
   inRange: 0
   player: {fileID: 1950653947}
