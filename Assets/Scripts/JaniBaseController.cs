@@ -56,6 +56,7 @@ public class JaniBaseController : BaseController
     protected override void Start()
     {
         base.Start();
+        // I've seen your map, why would you need a NavMeshAgent? I think this could've been done with just changing the velocity of the Rigidbody
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         FindBoundaries();
         levelCenter = new Vector3(0, 0, 0);
@@ -74,12 +75,16 @@ public class JaniBaseController : BaseController
             NextAction();
         }
 
+        // Sounds like this could've been solved with an IEnumerator or a "do: while" loop
         if (travelling && navMeshAgent.isStopped == true)
         {
             travelling = false;
             NextAction();
         }
+        // Isn't it possible that it's still not set after this if has run? That's why I suggested a do: while loop
 
+        // This rounds up and down, you could've just casted to an int 
+        // (by using ((int)Mathf.RoundToInt(health)).ToString(), but yeah that's less readable) 
         // Main Camera UI Text Updates
         healthT.text = "Health: " + Mathf.RoundToInt(health).ToString();
         armorT.text = "Armor: " + Mathf.RoundToInt(armor).ToString();
@@ -94,6 +99,7 @@ public class JaniBaseController : BaseController
         metabolismTT.text = "Metabolism: " + metabolism.ToString("F2");
         ammoTT.text = "Ammo: " + Mathf.RoundToInt(ammo).ToString();
 
+        // Please use an enum instead of numbers, it's more readable and for the computer it's still like using numbers
         // UI Current State Update
         if (currentState == 1)
         {
@@ -115,6 +121,7 @@ public class JaniBaseController : BaseController
         if (!alive)
         {
             cameraManager.janiAlive = false;
+            // What if another camera was active? Aren't you overriding that camera then?
             cameraManager.SwitchCam(0); // Switch to Main Camera
 
             // UI Update & Disable Player Camera Button
@@ -125,19 +132,22 @@ public class JaniBaseController : BaseController
 
             audioController.BacteriaDied(); // Play Death Sound FX
 
+            // You can just spawn the actual ParticleSystem if you use that as an Type instead (ParticleSystem explosionVFX). Instantiate is a generic function.
             // Play Death Particle FX
             GameObject tempEplosionFVX = Instantiate(explosionVFX);
             tempEplosionFVX.transform.position = gameObject.transform.position;
             tempEplosionFVX.GetComponentInChildren<ParticleSystem>().Play();
             Destroy(tempEplosionFVX, 02f);
             
+
+            // This keyword is superfluous, that's why it's "greyed out". It's a reference to the instance of the object, it's like me telling you who you are. You already know that!
             this.gameObject.SetActive(false); // Disable Game Object
         }
     }
 
     // Find Level Boundaries
     public void FindBoundaries()
-    {
+    {// This feels like it should've been an array instead of a list
         boundaries.Add(GameObject.Find("TopBoundary"));
         boundaries.Add(GameObject.Find("BotBoundary"));
         boundaries.Add(GameObject.Find("LeftBoundary"));
@@ -146,13 +156,13 @@ public class JaniBaseController : BaseController
 
     // Remove Dead Bacteria from List of Enemies
     public void RemoveEnemy(int id)
-    {
+    {// This sounds like it should've been a generic List<>. An array is generally immutable and it's purpose is that it doesn't change.
         enemiesList[id] = null;
     }
 
     // Determine Next Move
     private void NextAction()
-    {
+    {// The amount of magic numbers on line 164 are staggering. Please use variables so that you can then change it as you're playing in Unity. Takes a lot less time then changing the variables
         // Check Distance to Boundaries, If Below 45 -> Avoid Walls
         if (transform.position.x <= boundaries[3].transform.position.x - 65 && transform.position.x > boundaries[2].transform.position.x + 65 && 
             transform.position.x >= boundaries[1].transform.position.z + 65 && transform.position.z <= boundaries[0].transform.position.z - 65) 
@@ -174,8 +184,18 @@ public class JaniBaseController : BaseController
 
     }
 
-    // Find Specific Food Types based on Current Values
-    private void SearchForFood()
+  /*
+   * You use a lot of magic numbers, make sure you create variables for things that might change when balancing. 
+   * It's better to have variables for these that you can change in the editor, it's faster than recompiling scripts. 
+   * The SearchForFood can be optimised as there are a lot of if statements that are in there. 
+   * I think this must've been an if with else if statements coupled, because all of the Vector3.Distance that follow in each call are quite heavy. 
+   * I would also not look for all the objects each frame, but in Start and remove the ones that are null before you iterate through them. 
+   * You're basically doing the same thing, it could've been a fuction where you send an array as an argument and then you get the closest object (or position) back from the function. 
+   * Also, you might want to consider square distance, if you really want to use Distance that often.
+   * */
+
+  // Find Specific Food Types based on Current Values
+  private void SearchForFood()
     {
         currentState = 1;
         float closestRange = Mathf.Infinity;
@@ -279,7 +299,7 @@ public class JaniBaseController : BaseController
 
     // Find Nearby Enemy Bacteria
     private void SearchForEnemies()
-    {
+    { // Another set of magic numbers
         currentState = 2;
         Vector3 targetVector = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), Random.Range(-100, 100));
         navMeshAgent.SetDestination(targetVector);
@@ -287,7 +307,7 @@ public class JaniBaseController : BaseController
 
     // Travel to Center of Game Area
     private void SearchForCenter()
-    {
+    { // States are better of being an enum instead of a magic number. For the compiler it's the same, but it's more readable for humans
         currentState = 3;
         navMeshAgent.SetDestination(levelCenter);
     }

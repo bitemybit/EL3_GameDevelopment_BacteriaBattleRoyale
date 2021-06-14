@@ -54,7 +54,12 @@ public class CameraManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {// Feels like this could've been done with an array of all the bacteria and you just use a for loop to see how many are alive.
+        // I would also just have the name in the bacteria and you get it when it's the last one alive. You can fill the winner text like this:
+        // winnerText.text = $"{winnerName}'s Bacteria Wins!";
+        // Winnername is then taken from the bacteria
+        // If the positioning in the arrays is always the same (it seems like it), you could've also used an enum in combination with a dictionary
+        // That way you can also remove without using an array.
         if (!kaanAlive)
         {
             janiBaseController.RemoveEnemy(0);
@@ -116,7 +121,7 @@ public class CameraManager : MonoBehaviour
     public void SwitchCam(int id)
     {
         switch (id)
-        {
+        {// Apparently you did write parts of it, but I would've rewritten this to a struct that contains two variables (camera & canvas) and then just use a dictionary with the aforementioned enum
             case 0:
                 {
                     brandonCamera.enabled = false;
